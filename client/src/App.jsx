@@ -3,6 +3,7 @@ import {
   RouterProvider,
   redirect,
 } from "react-router-dom";
+import RegisterPage from "./pages/RegisterPage";
 
 const router = createBrowserRouter([
   {
@@ -16,12 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/register",
-    element: (
-      <>
-        {" "}
-        <h1>TESTING REGISTER</h1>
-      </>
-    ),
+    element: <RegisterPage />,
   },
   {
     path: "/login",
