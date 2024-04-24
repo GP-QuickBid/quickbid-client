@@ -1,16 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 export const postSlice = createSlice({
   name: "counter",
   initialState: {
     value: 0,
+    posts: [],
   },
   reducers: {
     increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
       state.value += 1;
     },
     decrement: (state) => {
@@ -19,9 +18,36 @@ export const postSlice = createSlice({
     incrementByAmount: (state, action) => {
       state.value += action.payload;
     },
+    postValue: (state, action) => {
+      state.games = action.payload;
+    },
   },
 });
 
-export const { increment, decrement, incrementByAmount } = postSlice.actions;
+export const { increment, decrement, incrementByAmount, postValue } =
+  postSlice.actions;
+
+export function fetchPosts() {
+  return async (dispatch, getState) => {
+    try {
+      let { data } = await axios({
+        method: "GET",
+        url: "http://localhost:3000/getPost",
+        headers: {
+          Authorization: `Bearer ${localStorage.access_token}`,
+        },
+      });
+      dispatch(postValue(data));
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        title: "Error!",
+        text: error.response.data.message,
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+    }
+  };
+}
 
 export default postSlice.reducer;
