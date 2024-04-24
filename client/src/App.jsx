@@ -6,6 +6,7 @@ import {
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import MainLayout from "./components/MainLayout";
+import HomePage from "./pages/HomePage";
 
 const router = createBrowserRouter([
   {
@@ -19,12 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: (
-          <>
-            {" "}
-            <h1>ini ada di home</h1>{" "}
-          </>
-        ),
+        element: <HomePage />,
       },
       {
         path: "/add",
