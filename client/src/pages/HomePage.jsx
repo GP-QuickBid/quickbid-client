@@ -1,4 +1,48 @@
+import loading from "../assets/Gear-0.2s-264px.svg";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { fetchPosts } from "../store/postSlice";
+
 export default function HomePage() {
+  // const posts = useSelector((state) => {
+  //   return state.posts;
+  // });
+  // const dispatch = useDispatch();
+  // console.log(posts);
+
+  // useEffect(() => {
+  //   dispatch(fetchPosts());
+  // }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      let { data } = await axios({
+        method: "DELETE",
+        url: "http://localhost:3000/delete/" + id,
+        headers: {
+          Authorization: `Bearer ${localStorage.access_token}`,
+        },
+      });
+      dispatch(fetchGames());
+      Swal.fire({
+        title: "Success!",
+        text: "Game deleted successfully",
+        icon: "success",
+        confirmButtonText: "Ok",
+      });
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        title: "Error!",
+        text: error.response.data.message,
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+    }
+  };
+
   return (
     <>
       {/* {games.length === 0 ? (
@@ -70,7 +114,12 @@ export default function HomePage() {
               <button className="btn btn-success btn-sm w-full mt-2 bg-green-500">
                 Bid
               </button>
-              <button className="btn btn-error btn-sm w-full mt-2">
+              <button
+                className="btn btn-error btn-sm w-full mt-2"
+                // onClick={() => {
+                //   handleDelete();
+                // }}
+              >
                 Delete
               </button>
             </div>
