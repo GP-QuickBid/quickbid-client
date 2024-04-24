@@ -65,7 +65,7 @@ export default function RegisterPage() {
                 placeholder="Enter User Name"
                 className="w-full input input-bordered input-accent"
                 name="userName"
-                value={input.email}
+                value={input.userName}
                 onChange={handleChangeInput}
               />
             </div>
