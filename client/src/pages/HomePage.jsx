@@ -20,15 +20,15 @@ export default function HomePage() {
     try {
       let { data } = await axios({
         method: "DELETE",
-        url: "http://localhost:3000/delete/" + id,
+        url: "http://localhost:3000/post/" + id,
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
         },
       });
-      dispatch(fetchGames());
+      dispatch(fetchPosts());
       Swal.fire({
         title: "Success!",
-        text: "Game deleted successfully",
+        text: "Auction deleted successfully",
         icon: "success",
         confirmButtonText: "Ok",
       });
@@ -82,12 +82,17 @@ export default function HomePage() {
                     <i className="fa-solid fa-circle" /> {post.status}
                   </div>
                   <div>
-                    <i className="fa-solid fa-dollar-sign" /> {post.price}
+                    <i className="fa-solid fa-dollar-sign" /> Rp {post.price}
                   </div>
                   <button className="btn btn-accent btn-sm w-full mt-2">
                     Bid
                   </button>
-                  <button className="btn btn-error btn-sm w-full mt-2">
+                  <button
+                    className="btn btn-error btn-sm w-full mt-2"
+                    onClick={() => {
+                      handleDelete(post.id);
+                    }}
+                  >
                     Delete
                   </button>
                 </div>
