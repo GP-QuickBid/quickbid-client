@@ -80,9 +80,7 @@ export default function HomePage() {
               <div>
                 <i className="fa-solid fa-dollar-sign" /> Price
               </div>
-              <button className="btn btn-success btn-sm w-full mt-2 bg-green-500">
-                Bid
-              </button>
+              <button className="btn btn-accent btn-sm w-full mt-2">Bid</button>
               <button className="btn btn-error btn-sm w-full mt-2">
                 Delete
               </button>
@@ -111,9 +109,7 @@ export default function HomePage() {
               <div>
                 <i className="fa-solid fa-dollar-sign" /> Price
               </div>
-              <button className="btn btn-success btn-sm w-full mt-2 bg-green-500">
-                Bid
-              </button>
+              <button className="btn btn-accent btn-sm w-full mt-2">Bid</button>
               <button
                 className="btn btn-error btn-sm w-full mt-2"
                 // onClick={() => {
@@ -147,9 +143,7 @@ export default function HomePage() {
               <div>
                 <i className="fa-solid fa-dollar-sign" /> Price
               </div>
-              <button className="btn btn-success btn-sm w-full mt-2 bg-green-500">
-                Bid
-              </button>
+              <button className="btn btn-accent btn-sm w-full mt-2">Bid</button>
               <button className="btn btn-error btn-sm w-full mt-2">
                 Delete
               </button>
@@ -178,9 +172,7 @@ export default function HomePage() {
               <div>
                 <i className="fa-solid fa-dollar-sign" /> Price
               </div>
-              <button className="btn btn-success btn-sm w-full mt-2 bg-green-500">
-                Bid
-              </button>
+              <button className="btn btn-accent btn-sm w-full mt-2">Bid</button>
               <button className="btn btn-error btn-sm w-full mt-2">
                 Delete
               </button>
