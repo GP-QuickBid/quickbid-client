@@ -5,7 +5,12 @@ import axios from "axios";
 import logo from "../assets/qUICK_bid-B9d0vuFYf-transformed.png";
 
 export default function RegisterPage() {
-  const [input, setInput] = useState({ email: "", password: "" });
+  const [input, setInput] = useState({
+    fullName: "",
+    userName: "",
+    email: "",
+    password: "",
+  });
   const navigate = useNavigate();
 
   const handleChangeInput = (e) => {
@@ -17,8 +22,8 @@ export default function RegisterPage() {
     e.preventDefault();
     try {
       const { data } = await axios({
-        method: "post",
-        url: import.meta.env.VITE_API_BASE_URL + "/register",
+        method: "POST",
+        url: "http://localhost:3000/register",
         data: input,
       });
       let msg = data.message;
