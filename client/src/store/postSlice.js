@@ -19,7 +19,7 @@ export const postSlice = createSlice({
       state.value += action.payload;
     },
     postValue: (state, action) => {
-      state.games = action.payload;
+      state.posts = action.payload;
     },
   },
 });
@@ -32,7 +32,7 @@ export function fetchPosts() {
     try {
       let { data } = await axios({
         method: "GET",
-        url: "http://localhost:3000/getPost",
+        url: "http://localhost:3000/post",
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
         },

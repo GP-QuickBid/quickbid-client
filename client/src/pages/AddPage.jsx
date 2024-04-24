@@ -24,7 +24,7 @@ export default function AddPage() {
     try {
       let { data } = await axios({
         method: "POST",
-        url: "http://localhost:3000/create",
+        url: "http://localhost:3000/post",
         data: { ...input, price },
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
