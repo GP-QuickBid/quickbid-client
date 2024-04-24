@@ -7,6 +7,7 @@ import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import MainLayout from "./components/MainLayout";
 import HomePage from "./pages/HomePage";
+import AddPage from "./pages/AddPage";
 
 const router = createBrowserRouter([
   {
@@ -24,11 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/add",
-        element: (
-          <>
-            <h1>testing ini di add</h1>
-          </>
-        ),
+        element: <AddPage />,
       },
     ],
   },
