@@ -6,8 +6,8 @@ import logo from "../assets/qUICK_bid-B9d0vuFYf-transformed.png";
 
 export default function RegisterPage() {
   const [input, setInput] = useState({
-    fullName: "",
     userName: "",
+    fullName: "",
     email: "",
     password: "",
   });
@@ -71,19 +71,6 @@ export default function RegisterPage() {
             </div>
             <div>
               <label className="label">
-                <span className="text-base label-text">Email</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Enter Email"
-                className="w-full input input-bordered input-accent"
-                name="email"
-                value={input.email}
-                onChange={handleChangeInput}
-              />
-            </div>
-            <div>
-              <label className="label">
                 <span className="text-base label-text">Name</span>
               </label>
               <input
@@ -92,6 +79,19 @@ export default function RegisterPage() {
                 className="w-full input input-bordered input-accent"
                 name="fullName"
                 value={input.fullName}
+                onChange={handleChangeInput}
+              />
+            </div>
+            <div>
+              <label className="label">
+                <span className="text-base label-text">Email</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter Email"
+                className="w-full input input-bordered input-accent"
+                name="email"
+                value={input.email}
                 onChange={handleChangeInput}
               />
             </div>
