@@ -87,6 +87,9 @@ export default function HomePage() {
         setPosts([...posts]); // Update the state
       }
     });
+    socket.on("dataBaru", (databaru) => {
+      setPosts(databaru);
+    });
 
     return () => {
       socket.off("allUsers");
@@ -94,6 +97,7 @@ export default function HomePage() {
       socket.off("dataCreated");
       socket.off("postDeleted");
       socket.off("postBid");
+      socket.off("dataBaru");
     };
   }, []);
 
