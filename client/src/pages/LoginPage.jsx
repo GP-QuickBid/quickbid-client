@@ -22,7 +22,7 @@ export default function LoginPage() {
     try {
       let { data } = await axios({
         method: "POST",
-        url: "http://localhost:3000/login",
+        url: import.meta.env.VITE_API_BASE_URL + "/login",
         data: input,
       });
 
