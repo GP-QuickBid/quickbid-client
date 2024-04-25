@@ -22,7 +22,7 @@ export default function LoginPage() {
     try {
       let { data } = await axios({
         method: "POST",
-        url: import.meta.env.VITE_API_BASE_URL + "/login",
+        url: "https://quickbid.rezaarga.xyz/login",
         data: input,
       });
 

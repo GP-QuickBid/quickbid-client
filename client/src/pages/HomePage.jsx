@@ -16,7 +16,7 @@ export default function HomePage() {
     try {
       let { data } = await axios({
         method: "DELETE",
-        url: import.meta.env.VITE_API_BASE_URL + "/post/" + id,
+        url: "https://quickbid.rezaarga.xyz/post/" + id,
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
         },

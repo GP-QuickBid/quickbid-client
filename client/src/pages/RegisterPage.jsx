@@ -23,7 +23,7 @@ export default function RegisterPage() {
     try {
       const { data } = await axios({
         method: "POST",
-        url: import.meta.env.VITE_API_BASE_URL + "/register",
+        url: "https://quickbid.rezaarga.xyz/register",
         data: input,
       });
       let msg = data.message;

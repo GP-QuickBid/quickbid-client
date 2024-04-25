@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-const socket = io("https://quickbid.rezaarga.xyz/");
+const socket = io("https://quickbid.rezaarga.xyz");
 // , {
 //     query: { token: localStorage.getItem("access_token") }
 // }

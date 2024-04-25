@@ -25,7 +25,7 @@ export default function AddPage() {
     try {
       let { data } = await axios({
         method: "POST",
-        url: import.meta.env.VITE_API_BASE_URL + "/post",
+        url: "https://quickbid.rezaarga.xyz/post",
         data: { ...input, price },
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
