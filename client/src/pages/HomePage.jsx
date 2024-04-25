@@ -90,7 +90,7 @@ export default function HomePage() {
 
     return () => {
       socket.off("allUsers");
-      // socket.off('allData');
+      socket.off("allData");
       socket.off("dataCreated");
       socket.off("postDeleted");
       socket.off("postBid");
