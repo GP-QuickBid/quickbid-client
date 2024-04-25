@@ -9,8 +9,8 @@ import { postValue } from "../store/postSlice";
 export default function HomePage() {
   const [posts, setPosts] = useState([]);
 
-  const dispatch = useDispatch()
-  // const posts = useSelector(state => state.posts) 
+  const dispatch = useDispatch();
+  // const posts = useSelector(state => state.posts)
 
   const handleDelete = async (id) => {
     try {
@@ -40,7 +40,6 @@ export default function HomePage() {
     }
   };
 
-
   const handleBid = async (id) => {
     try {
       socket.emit("bidPost", id);
@@ -61,19 +60,18 @@ export default function HomePage() {
     }
   };
 
-
   useEffect(() => {
-    socket.emit('getAllUsers');
-    socket.on('allData', (newData) => {
+    socket.emit("getAllUsers");
+    socket.on("allData", (newData) => {
       console.log(newData, "newData");
       setPosts(newData);
     });
-    socket.on('allUsers', (data) => {
-      console.log(data, 'data <<<<<');
+    socket.on("allUsers", (data) => {
+      console.log(data, "data <<<<<");
       setPosts(data);
     });
-    socket.on('dataCreated', (newData) => {
-      console.log(newData, 'data created<<<<<');
+    socket.on("dataCreated", (newData) => {
+      console.log(newData, "data created<<<<<");
       setPosts((prevPosts) => [...prevPosts, newData]);
     });
     socket.on("postDeleted", (deletedPostId) => {
@@ -89,13 +87,13 @@ export default function HomePage() {
         setPosts([...posts]); // Update the state
       }
     });
-    
+
     return () => {
-      socket.off('allUsers');
-      socket.off('allData');
-      socket.off('dataCreated')
-      socket.off('postDeleted')
-      socket.off('postBid')
+      socket.off("allUsers");
+      // socket.off('allData');
+      socket.off("dataCreated");
+      socket.off("postDeleted");
+      socket.off("postBid");
     };
   }, []);
 
@@ -105,17 +103,32 @@ export default function HomePage() {
         <main className="grid grid-cols-2 gap-5 px-10 my-8">
           {posts.map((post) => {
             return (
-              <div key={post.id} className="card bg-base-300 shadow flex flex-row">
+              <div
+                key={post.id}
+                className="card bg-base-300 shadow flex flex-row"
+              >
                 <figure className="flex flex-col">
-                  <img src={post.imageUrl} className="max-w-xs h-3/4 rounded-lg shadow ml-5" alt="Post" />
+                  <img
+                    src={post.imageUrl}
+                    className="max-w-xs h-3/4 rounded-lg shadow ml-5"
+                    alt="Post"
+                  />
                 </figure>
                 <div className="card-body flex-1">
                   <b>{post.title}</b>
                   <hr />
-                  <div><i className="fa-solid fa-user" /> {post.User.fullName}</div>
-                  <div><i className="fa-solid fa-book" /> {post.description}</div>
-                  <div><i className="fa-solid fa-circle" /> {post.status}</div>
-                  <div><i className="fa-solid fa-dollar-sign" /> Rp {post.price}</div>
+                  <div>
+                    <i className="fa-solid fa-user" /> {post.User.fullName}
+                  </div>
+                  <div>
+                    <i className="fa-solid fa-book" /> {post.description}
+                  </div>
+                  <div>
+                    <i className="fa-solid fa-circle" /> {post.status}
+                  </div>
+                  <div>
+                    <i className="fa-solid fa-dollar-sign" /> Rp {post.price}
+                  </div>
                   <button
                     className="btn btn-accent btn-sm w-full mt-2"
                     onClick={() => {
@@ -124,7 +137,14 @@ export default function HomePage() {
                   >
                     Bid
                   </button>
-                  <button className="btn btn-error btn-sm w-full mt-2" onClick={() => { handleDelete(post.id); }}>Delete</button>
+                  <button
+                    className="btn btn-error btn-sm w-full mt-2"
+                    onClick={() => {
+                      handleDelete(post.id);
+                    }}
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             );
