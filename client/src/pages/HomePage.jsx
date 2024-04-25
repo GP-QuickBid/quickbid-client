@@ -21,6 +21,8 @@ export default function HomePage() {
           Authorization: `Bearer ${localStorage.access_token}`,
         },
       });
+      socket.emit("deletePost", id);
+
       Swal.fire({
         title: "Success!",
         text: "Auction deleted successfully",
@@ -39,23 +41,61 @@ export default function HomePage() {
   };
 
 
+  const handleBid = async (id) => {
+    try {
+      socket.emit("bidPost", id);
+      Swal.fire({
+        title: "Success!",
+        text: "Bid successfully",
+        icon: "success",
+        confirmButtonText: "Ok",
+      });
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        title: "Error!",
+        text: error.response.data.message,
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+    }
+  };
+
+
   useEffect(() => {
     socket.emit('getAllUsers');
     socket.on('allData', (newData) => {
-      // console.log(newData, "newData");
+      console.log(newData, "newData");
       setPosts(newData);
     });
     socket.on('allUsers', (data) => {
-      // console.log(data, '<<<<<');
+      console.log(data, 'data <<<<<');
       setPosts(data);
     });
     socket.on('dataCreated', (newData) => {
+      console.log(newData, 'data created<<<<<');
       setPosts((prevPosts) => [...prevPosts, newData]);
     });
+    socket.on("postDeleted", (deletedPostId) => {
+      // Filter post yang telah dihapus dari state posts
+      setPosts((prevPosts) =>
+        prevPosts.filter((post) => post.id !== deletedPostId)
+      );
+    });
+    socket.on("postBid", (id) => {
+      const post = posts.find((post) => post.id === id);
+      if (post) {
+        post.price += 10000; // Update the price
+        setPosts([...posts]); // Update the state
+      }
+    });
+    
     return () => {
       socket.off('allUsers');
       socket.off('allData');
       socket.off('dataCreated')
+      socket.off('postDeleted')
+      socket.off('postBid')
     };
   }, []);
 
@@ -76,7 +116,14 @@ export default function HomePage() {
                   <div><i className="fa-solid fa-book" /> {post.description}</div>
                   <div><i className="fa-solid fa-circle" /> {post.status}</div>
                   <div><i className="fa-solid fa-dollar-sign" /> Rp {post.price}</div>
-                  <button className="btn btn-accent btn-sm w-full mt-2">Bid</button>
+                  <button
+                    className="btn btn-accent btn-sm w-full mt-2"
+                    onClick={() => {
+                      handleBid(post.id);
+                    }}
+                  >
+                    Bid
+                  </button>
                   <button className="btn btn-error btn-sm w-full mt-2" onClick={() => { handleDelete(post.id); }}>Delete</button>
                 </div>
               </div>
